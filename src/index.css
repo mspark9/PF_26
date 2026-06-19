@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* ===== 디자인 토큰 (색/폰트만 여기서 바꾸면 전체 반영) ===== */
+@theme {
+  --color-accent: #FFFFFF;     /* 포인트 (흑백 톤: 화이트) */
+  --color-accent2: #6E6E73;    /* 보조 (그레이) */
+  --color-paper: #0A0A0A;      /* 배경 (블랙) */
+  --color-card: #161616;       /* 카드 배경 */
+  --color-ink: #F5F5F3;        /* 기본 텍스트 (화이트) */
+  --color-muted: #8A8A88;      /* 보조 텍스트 (그레이) */
+  --font-display: "Space Grotesk", "Pretendard", sans-serif;
+  --font-sans: "Pretendard", system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::selection { background: var(--color-ink); color: #0A0A0A; }
+
+/* ===== Lenis 부드러운 스크롤 ===== */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ===== 애니메이션 ===== */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes marquee-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-22px) } }
+@keyframes spin-slow { to { transform: rotate(360deg) } }
+
+.animate-marquee { animation: marquee 30s linear infinite; }
+.animate-marquee-rev { animation: marquee-rev 30s linear infinite; }
+.animate-float { animation: float 8s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 22s linear infinite; }
+.pause-hover:hover .animate-marquee,
+.pause-hover:hover .animate-marquee-rev { animation-play-state: paused; }
+
+/* 스크롤 등장 */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* 속이 파인(아웃라인) 텍스트 */
+.text-hollow {
+  color: transparent;
+  -webkit-text-stroke: 1.6px var(--color-ink);
+  text-stroke: 1.6px var(--color-ink);
+}
+@media (min-width: 640px) {
+  .text-hollow { -webkit-text-stroke-width: 2.2px; text-stroke-width: 2.2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-marquee, .animate-marquee-rev, .animate-float, .animate-spin-slow { animation: none; }
+}
