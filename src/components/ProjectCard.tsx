@@ -3,8 +3,8 @@ import type { Project } from '../data/projects'
 export default function ProjectCard({ project: p }: { project: Project }) {
   return (
     <article className="group relative overflow-hidden rounded-2xl border border-white/10 bg-card">
-      {/* 커버 */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+      {/* 커버: 기본 완전 흑백 → 호버 시 컬러 (그라데이션 여백까지 포함) */}
+      <div className="relative aspect-[4/3] overflow-hidden grayscale transition duration-700 ease-out group-hover:grayscale-0">
         {/* 폴백 그라데이션 (이미지 없을 때 / 로딩 전) */}
         <div className="absolute inset-0" style={{ background: p.gradient }} />
 
@@ -15,14 +15,14 @@ export default function ProjectCard({ project: p }: { project: Project }) {
               src={p.image}
               alt=""
               aria-hidden="true"
-              className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-xl grayscale transition-all duration-700 group-hover:grayscale-0"
+              className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-xl"
             />
             {/* 메인: 가로 100% · 세로 중앙 · 잘리지 않게 contain */}
             <img
               src={p.image}
               alt={p.title}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-contain grayscale transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:grayscale-0"
+              className="absolute inset-0 h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             />
           </>
         )}
