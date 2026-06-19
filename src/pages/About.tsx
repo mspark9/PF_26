@@ -74,8 +74,12 @@ export default function About() {
           {/* 포트레이트 이미지 */}
           <Reveal delay={120}>
             <div className="relative mb-8 aspect-[4/5] w-full max-w-xs">
-              <div className="relative h-full w-full overflow-hidden rounded-3xl border border-white/10 bg-card">
-                <img src="/about.jpg" alt="작업 공간" className="h-full w-full object-cover" />
+              <div className="group relative h-full w-full overflow-hidden rounded-3xl border border-white/10 bg-card">
+                <img
+                  src="/about.jpg"
+                  alt="작업 공간"
+                  className="h-full w-full object-cover grayscale transition-all duration-500 ease-out group-hover:scale-[1.03] group-hover:grayscale-0"
+                />
               </div>
             </div>
           </Reveal>
